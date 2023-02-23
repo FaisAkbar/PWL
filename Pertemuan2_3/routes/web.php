@@ -44,7 +44,7 @@ Route::get('/news/{title?}', function ($title = null) {
 });
 
 //Number 4
-Route::prefix('/program/{program?}', function () {
+Route::prefix('/program')->group (function () {
     Route::get('/karir', function () {
         return "Menampilkan halaman program karir";
     });
