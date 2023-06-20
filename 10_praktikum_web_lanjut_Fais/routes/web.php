@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Models\Article;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,11 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::resource('articles', ArticleController::class);
-Route::get('print_article', [ArticleController::class, 'print_pdf']);
+Route::get('/article/cetak_pdf', [ArticleController::class, 'cetak_pdf']);

@@ -1,26 +1,11 @@
-@extends('mahasiswas.layout')
-@section('content')
+@extends('mahasiswas.layout') @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left mt-2">
-                <h2>jurusan TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
-
-                <form action="" method="GET">
-                    <div class="row">
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="nama" placeholder="Cari nama Mahasiswa"
-                                aria-label="First name">
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-warning" type="submit">Cari</button>
-                        </div>
-                    </div>
-                </form>
+                <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
             </div>
-
-            <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('mahasiswas.create') }}"> Input Mahasiswa</a>
-            </div>
+            <div class="float-right my-2"> <a class="btn btn-success" href="{{ route('mahasiswas.create') }}"> Input
+                    Mahasiswa</a> </div>
         </div>
     </div>
     @if ($message = Session::get('success'))
@@ -30,36 +15,28 @@
     @endif
     <table class="table table-bordered">
         <tr>
-            <th>nim</th>
-            <th>nama</th>
-            <th>kelas</th>
-            <th>jurusan</th>
-            <th>no_handphone</th>
-            <th>email</th>
-            <th>tanggal_lahir</th>
+            <th>Nim</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Jurusan</th>
+            <th>No_Handphone</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($mahasiswas as $Mahasiswa)
             <tr>
-                <td>{{ $Mahasiswa->nim }}</td>
-                <td>{{ $Mahasiswa->nama }}</td>
-                <td>{{ $Mahasiswa->kelas->nama_kelas }}</td>
-                <td>{{ $Mahasiswa->jurusan }}</td>
-                <td>{{ $Mahasiswa->no_handphone }}</td>
-                <td>{{ $Mahasiswa->email }}</td>
-                <td>{{ $Mahasiswa->tanggal_lahir }}</td>
+                <td>{{ $Mahasiswa->Nim }}</td>
+                <td>{{ $Mahasiswa->Nama }}</td>
+                <td>{{ $Mahasiswa->Kelas }}</td>
+                <td>{{ $Mahasiswa->Jurusan }}</td>
+                <td>{{ $Mahasiswa->No_Handphone }}</td>
                 <td>
-                    <form action="{{ route('mahasiswas.destroy', $Mahasiswa->nim) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('mahasiswas.show', $Mahasiswa->nim) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('mahasiswas.edit', $Mahasiswa->nim) }}">Edit</a>
+                    <form action="{{ route('mahasiswas.destroy', $Mahasiswa->Nim) }}" method="POST"> <a class="btn btn-info"
+                            href="{{ route('mahasiswas.show', $Mahasiswa->Nim) }}">Show</a> <a class="btn btn-primary"
+                            href="{{ route('mahasiswas.edit', $Mahasiswa->Nim) }}">Edit</a>
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                        @method('DELETE') <button type="submit" class="btn btn-danger">Delete</button> </form>
                 </td>
             </tr>
         @endforeach
     </table>
-
-    {{ $mahasiswas->links() }}
 @endsection

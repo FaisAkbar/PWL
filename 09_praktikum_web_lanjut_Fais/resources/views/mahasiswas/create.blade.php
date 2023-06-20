@@ -3,14 +3,11 @@
     <div class="container mt-5">
         <div class="row justify-content-center align-items-center">
             <div class="card" style="width: 24rem;">
-                <div class="card-header">
-                    Tambah Mahasiswa
-                </div>
+                <div class="card-header"> Tambah Mahasiswa </div>
                 <div class="card-body">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your i
-                            nput.<br><br>
+                        <div class="alert alert-danger"> <strong>Whoops!</strong> There were some problems with your
+                            input.<br><br>
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -18,50 +15,35 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="post" action="{{ route('mahasiswas.store') }}" id="myForm">
-                        @csrf
-                        <div class="form-group">
-                            <label for="nim">nim</label>
-                            <input type="text" name="nim" class="form-control" id="nim" aria-describedby="nim">
+                    <form method="post" action="{{ route('mahasiswas.store') }}" id="myForm"> @csrf <div
+                            class="form-group"> <label for="Nim">Nim</label> <input type="text" name="Nim"
+                                class="form-control" id="Nim" aria-describedby="Nim"> </div>
+                        <div class="form-group"> <label for="Nama">Nama</label> <input type="Nama" name="Nama"
+                                class="form-control" id="Nama" aria-describedby="Nama"> </div>
+                        <div class="form-group"> <label for="Kelas">Kelas</label>
+                            <input type="Kelas" name="Kelas" class="form-control" id="Kelas"
+                                aria-describedby="password">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Nim: </b>{{ $Mahasiswa->Nim }}</li>
+                                    <li class="list-group-item"><b>Nama: </b>{{ $Mahasiswa->Nama }}</li>
+                                    <li class="list-group-item"><b>Kelas: </b>{{ $Mahasiswa->Kelas }}</li>
+                                    <li class="list-group-item"><b>Jurusan: </b>{{ $Mahasiswa->Jurusan }}</li>
+                                    <li class="list-group-item"><b>No_Handphone: </b>{{ $Mahasiswa->No_Handphone }}</li>
+                                </ul>
+                            </div> <a class="btn btn-success mt-3" href="{{ route('mahasiswas.index') }}">Kembali</a>
                         </div>
-                        <div class="form-group">
-                            <label for="nama">nama</label>
-                            <input type="nama" name="nama" class="form-control" id="nama"
-                                aria-describedby="nama">
-                        </div>
-                        <div class="form-group">
-                            <label for="kelas">kelas</label>
-                            <select class="form-control" name="kelas">
-                                <option value="">Pilih kelas</option>
-                                @foreach ($kelas as $kls)
-                                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="jurusan">jurusan</label>
-                            <input type="jurusan" name="jurusan" class="form-control" id="jurusan"
-                                aria-describedby="jurusan">
-                        </div>
-                        <div class="form-group">
-                            <label for="no_handphone">no_handphone</label>
-                            <input type="no_handphone" name="no_handphone" class="form-control" id="no_handphone"
-                                aria-describedby="no_handphone">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">email</label>
-                            <input type="email" name="email" class="form-control" id="email"
-                                aria-describedby="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal_lahir">tanggal_lahir</label>
-                            <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir"
-                                aria-describedby="tanggal_lahir">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
                 </div>
-            </div>
-        </div>
+        </div> @endsection
     </div>
+    <div class="form-group"> <label for="Jurusan">Jurusan</label> <input type="Jurusan" name="Jurusan"
+            class="form-control" id="Jurusan" aria-describedby="Jurusan"> </div>
+    <div class="form-group"> <label for="No_Handphone">No_Handphone</label> <input type="No_Handphone"
+            name="No_Handphone" class="form-control" id="No_Handphone" aria-describedby="No_Handphone">
+    </div> <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
+</div>
+</div>
 @endsection

@@ -14,8 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        //
     }
 
     /**
@@ -33,15 +32,13 @@ class ArticleController extends Controller
     {
         if ($request->file('image')) {
             $image_name = $request->file('image')->store('images', 'public');
-            Article::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'featured_image' => $image_name,
-            ]);
-            return view('articles');
-        } else {
-            return view('articles.create');
         }
+
+        Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'featured_image' => $image_name
+        ]);
     }
 
     /**
@@ -57,25 +54,32 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $article = Article::find($article->id);
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        $article->title = $request->title;
-        $article->content = $request->content;
+        $article = Article::find($id);
 
-        if ($article->featured_image && file_exists(storage_path('app/public/' . $article->featured_image))) {
-            Storage::delete('public/' . $article->featured_image);
+        $article->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        if ($request->file('image')) {
+            if ($article->featured_image && file_exists(storage_path('app/public/' . $article->featured_image))) {
+                Storage::delete('public/' . $article->featured_image);
+            }
+            $image_name = $request->file('image')->store('images', 'public');
+            $article->featured_image = $image_name;
         }
-        $image_name = $request->file('image')->store('images', 'public');
-        $article->featured_image = $image_name;
-
         $article->save();
-        return redirect('/articles');
+        return 'Article successfully updated';
+
     }
 
     /**
@@ -83,15 +87,16 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        Storage::delete('public/' . $article->featured_image);
-        $article->delete();
-        return redirect('/articles');
+        //
     }
 
-    public function print_pdf()
+    /**
+     * Generate PDF
+     */
+    public function cetak_pdf()
     {
         $articles = Article::all();
-        $pdf = PDF::loadview('articles.articles_pdf', ['articles' => $articles]);
+        $pdf = 'PDF'::loadview('articles.articles_pdf', ['articles' => $articles]);
         return $pdf->stream();
     }
 }
